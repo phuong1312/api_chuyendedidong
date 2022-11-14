@@ -1,13 +1,24 @@
 const Drink = require("../model/drink");
 const Category = require("../model/category");
+const fs = require("fs");
 
 const drinkController = {
   //add user
   addDrink: async (req, res) => {
-    console.log(req.body);
+    // console.log({
+    //   name: req.body.name,
+    //   price: req.body.price,
+    //   image: req.file,
+    //   category: req.body.category,
+    // });
     // res.status(200).json(req.body);
     try {
-      const newDrink = new Drink(req.body);
+      const newDrink = new Drink({
+        name: req.body.name,
+        price: req.body.price,
+        image: req.file.path,
+        category: req.body.category,
+      });
       const saveDrink = await newDrink.save();
       // if (req.body.category) {
       //   const category = Category.find(req.body.category);
@@ -20,7 +31,12 @@ const drinkController = {
       res.status(200).json({
         success: true,
         message: "add successful drinks",
-        data: saveDrink,
+        data: {
+          name: req.body.name,
+          price: req.body.price,
+          image: req.file.path,
+          category: req.body.category,
+        },
       });
     } catch (err) {
       res.status(500).json({
@@ -65,7 +81,14 @@ const drinkController = {
   updateDrink: async (req, res) => {
     try {
       const drink = await Drink.findById(req.params.id);
-      await drink.updateOne({ $set: req.body, time_update: Date.now() });
+      await drink.updateOne({
+        $set: {
+          name: req.body.name,
+          price: req.body.price,
+          image: req.file.path,
+          category: req.body.category,
+        },
+      });
       res.status(200).json({
         success: true,
         message: "update successful drink",

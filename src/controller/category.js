@@ -1,5 +1,5 @@
 const Category = require("../model/category");
-const  Drink  = require("../model/drink");
+const Drink = require("../model/drink");
 
 const categoryController = {
   addCategory: async (req, res) => {
@@ -38,7 +38,8 @@ const categoryController = {
   updateCategory: async (req, res) => {
     try {
       const category = await Category.findById(req.params.id);
-      await category.updateOne({ $set: req.body, time_update: Date.now() });
+      //, time_update: Date.now()
+      await category.updateOne({ $set: req.body });
       res.status(200).json({
         success: true,
         message: "update successful category",
