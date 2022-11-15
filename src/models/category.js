@@ -12,6 +12,12 @@ const categorySchema = new mongoose.Schema(
     // time_update: {
     //   type: Date,
     // },
+    // drinks: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Drink",
+    //   },
+    // ],
   },
   { timestamps: true }
 );

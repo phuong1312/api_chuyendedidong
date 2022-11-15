@@ -1,5 +1,5 @@
-const Drink = require("../model/drink");
-const Category = require("../model/category");
+const Drink = require("../models/drink");
+const Category = require("../models/category");
 const fs = require("fs");
 
 const drinkController = {
@@ -48,7 +48,7 @@ const drinkController = {
 
   getAllDrink: async (req, res) => {
     try {
-      const drinks = await Drink.find().populate("category");
+      const drinks = await Drink.find();
       res.status(200).json({
         success: true,
         message: "read successful drinks",
@@ -64,7 +64,24 @@ const drinkController = {
 
   getDrinkById: async (req, res) => {
     try {
-      const drink = await Drink.findById(req.params.id).populate("category");
+      const drink = await Drink.findById(req.params.id);
+      res.status(200).json({
+        success: true,
+        message: "read successful drink",
+        data: drink,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        data: error,
+      });
+    }
+  },
+
+  getDrinkByCategoryId: async (req, res) => {
+    try {
+      //const category = await Category.findById(req.params.id);
+      const drink = await Drink.find({ category: req.params.id });
       res.status(200).json({
         success: true,
         message: "read successful drink",
