@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 var dbConn = require('./src/config/config');
 const userRoute = require('./src/routes/UserRoute');
+const roleRoute = require('./src/routes/RoleRoute');
 
 
 mongoose.connection.once('open', () => {
@@ -24,7 +25,9 @@ mongoose.connection.once('open', () => {
     });
 });
 
-app.use('/api/add_user', userRoute);
+app.use('/api/user', userRoute);
+app.use('/api/role', roleRoute);
+
 
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(morgan('common'));
