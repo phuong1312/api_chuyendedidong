@@ -21,7 +21,7 @@ const userController = {
                     await updateRole.updateOne({ $push: { users: saveUser._id } });
                     // console.log("ok role");
                 };
-                res.status(200).json(saveUser);
+                res.status(200).send(saveUser);
             }
         } catch (err) {
             res.status(500).json(err);
@@ -42,7 +42,7 @@ const userController = {
         try {
             const getUser = await User.findById(req.params.id);
             // await updateUser.updateOne({ $set: req.body });
-            res.status(200).json(getUser);
+            res.status(200).send(getUser);
             // console.log(getUser);
         } catch (err) {
             res.status(500).json(err);
@@ -67,7 +67,7 @@ const userController = {
         try {
             // console.log(req.params.id);
             const allUser = await User.findByIdAndUpdate(req.params.id, req.body);
-            res.status(200).json("Update User is Success!");
+            res.status(200).send("Update User is Success!");
             // console.log(allUser);
         } catch (err) {
             res.status(500).json(err);
