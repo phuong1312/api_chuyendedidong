@@ -51,9 +51,10 @@ const categoryController = {
       });
     }
   },
+
   deleteCategory: async (req, res) => {
     try {
-      await Drink.updateMany({ category: req.params.id }, { category: null });
+      await Drink.updateMany({ category: req.params.id }, { category: " " });
       await Category.findByIdAndDelete(req.params.id);
       res.status(200).json({
         success: true,

@@ -5,13 +5,6 @@ const fs = require("fs");
 const drinkController = {
   //add user
   addDrink: async (req, res) => {
-    // console.log({
-    //   name: req.body.name,
-    //   price: req.body.price,
-    //   image: req.file,
-    //   category: req.body.category,
-    // });
-    // res.status(200).json(req.body);
     try {
       const newDrink = new Drink({
         name: req.body.name,
@@ -20,14 +13,14 @@ const drinkController = {
         category: req.body.category,
       });
       const saveDrink = await newDrink.save();
-      // if (req.body.category) {
-      //   const category = Category.find(req.body.category);
-      //   await category.updateOne({
-      //     $push: {
-      //       drinks: saveDrink._id,
-      //     },
-      //   });
-      // }
+      if (req.body.category) {
+        const category = Category.findById(req.body.category);
+        await category.updateOne({
+          $push: {
+            drinks: saveDrink._id,
+          },
+        });
+      }
       res.status(200).json({
         success: true,
         message: "add successful drinks",
@@ -65,6 +58,7 @@ const drinkController = {
   getDrinkById: async (req, res) => {
     try {
       const drink = await Drink.findById(req.params.id);
+      //console.log(drink);
       res.status(200).json({
         success: true,
         message: "read successful drink",
@@ -95,20 +89,40 @@ const drinkController = {
     }
   },
 
+  // $set: {
+  //   name: req.body.name,
+  //   price: req.body.price,
+  //   image: req.file.path,
+  //   category: req.body.category,
+  // },
   updateDrink: async (req, res) => {
     try {
       const drink = await Drink.findById(req.params.id);
-      await drink.updateOne({
-        $set: {
-          name: req.body.name,
-          price: req.body.price,
-          image: req.file.path,
-          category: req.body.category,
-        },
-      });
+      const image = req.file;
+
+      if (!image) {
+        await drink.updateOne({
+          $set: {
+            name: req.body.name,
+            price: req.body.price,
+            category: req.body.category,
+          },
+        });
+      } else {
+        await drink.updateOne({
+          $set: {
+            name: req.body.name,
+            price: req.body.price,
+            image: req.file.path,
+            category: req.body.category,
+          },
+        });
+      }
+
       res.status(200).json({
         success: true,
         message: "update successful drink",
+        // date: drink,
       });
     } catch (error) {
       res.status(500).json({
@@ -119,6 +133,10 @@ const drinkController = {
   },
   deleteDrink: async (req, res) => {
     try {
+      await Category.updateMany(
+        { drinks: req.params.id },
+        { $pull: { drinks: req.params.id } }
+      );
       await Drink.findByIdAndDelete(req.params.id);
       res.status(200).json({
         success: true,
