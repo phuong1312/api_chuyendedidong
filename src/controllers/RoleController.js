@@ -3,14 +3,22 @@ const Role = require("../models/Role");
 const roleController = {
     //add role
     addRole: async (req, res) => {
-        // console.log(req.body);
-        //res.json(req.body);
         try {
             const newRole = new Role(req.body);
             const saveRole = await newRole.save();
-            res.json(saveRole);
+            return res.status(200).json(saveRole);
         } catch (err) {
             res.status(500).json(err);
+        };
+    },
+    //get all role
+    getAllRole: async (req, res) => {
+        try {
+            const getAllRole = await Role.find();
+            return res.status(200).json(getAllRole);
+            // console.log(getAllUser);
+        } catch (err) {
+            return res.status(500).json(err);
         };
     },
 };

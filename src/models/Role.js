@@ -5,10 +5,6 @@ const role = new mongoose.Schema({
         type: String,
         // required: true,
     },
-    users: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-    }]
 });
 
 let Role = mongoose.model("Role", role);
