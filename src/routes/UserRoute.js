@@ -4,6 +4,8 @@ const router = require('express').Router();
 
 //login user
 router.post('/login', userController.login);
+//logout user
+router.post('/logout', userController.logout);
 //add user
 router.post('/add', userController.addUser);
 //get all user

@@ -10,27 +10,27 @@ const userController = {
         try {
             console.log(req.body.user_name == "" && req.body.password == "" && req.body.full_name == "" && req.body.phone == "" && req.body.role == "");
             if (req.body.user_name == "" && req.body.password == "" && req.body.full_name == "" && req.body.phone == "" && req.body.role == "") {
-                return res.status(402).json("Vui lòng điền đầy đủ thông tin");
+                return res.status(402).json({error:"Vui lòng điền đầy đủ thông tin"});
             }
             else if (req.body.user_name == "") {
-                return res.status(402).json("Vui lòng điền Tên Tài Khoản");
+                return res.status(402).json({error:"Vui lòng điền Tên Tài Khoản"});
             }
             else if (req.body.password  == "") {
-                return res.status(402).json("Vui lòng điền Password");
+                return res.status(402).json({error:"Vui lòng điền Password"});
             }
             else if (req.body.full_name == "") {
-                return res.status(402).json("Vui lòng điền Họ và Tên");
+                return res.status(402).json({error:"Vui lòng điền Họ và Tên"});
             }
             else if (req.body.phone == "") {
-                return res.status(402).json("Vui lòng điền SĐT");
+                return res.status(402).json({error:"Vui lòng điền SĐT"});
             }
             else if (req.body.role == "") {
-                return res.status(402).json("Vui lòng chọn vai trò");
+                return res.status(402).json({error:"Vui lòng chọn vai trò"});
             } else {
                 const newUser = new User(req.body);
                 const saveUser = await newUser.save();
-                const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET);
-                // return res.status(200).send(saveUser);
+                // const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET);
+                return res.status(200).send(saveUser);
             }
         } catch (err) {
             return res.status(500).json(err);
@@ -41,7 +41,6 @@ const userController = {
         try {
             const getAllUser = await User.find();
             return res.status(200).json(getAllUser);
-            // console.log(getAllUser);
         } catch (err) {
             return res.status(500).json(err);
         };
@@ -64,7 +63,6 @@ const userController = {
                 await Role.updateMany({ users: req.params.id }, { $pull: { users: req.params.id } });
             };
             return res.status(200).send("Delete User is Success!");
-            console.log("Delete User is Success!");
         } catch (err) {
             return  res.status(500).json(err);
         };
@@ -122,6 +120,10 @@ const userController = {
         // console.log({user_name: user_name});
 
     },
+
+    logout: async (req, res) => {
+        console.log(req.body);
+    }
 };
 
 module.exports = userController;
