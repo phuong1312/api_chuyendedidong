@@ -27,9 +27,9 @@ const tableController = {
     }
   },
 
-  getAllDrink: async (req, res) => {
+  getAllTable: async (req, res) => {
     try {
-      const tables = await Table.find();
+      const tables = await Table.find().populate("area");
       res.status(200).json({
         success: true,
         message: "read successful table",
@@ -53,6 +53,22 @@ const tableController = {
       res.status(200).json({
         success: true,
         message: "deleted successful table",
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        data: error,
+      });
+    }
+  },
+  getTableByAreaId: async (req, res) => {
+    try {
+      //const category = await Category.findById(req.params.id);
+      const drink = await Table.find({ area: req.params.id });
+      res.status(200).json({
+        success: true,
+        message: "read successful TableByArea",
+        data: drink,
       });
     } catch (error) {
       res.status(500).json({

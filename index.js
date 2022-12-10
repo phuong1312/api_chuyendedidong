@@ -39,7 +39,7 @@ app.set("view engine", "ejs");
 // var upload = multer({ storage: storage });
 
 var dbConn = require("./src/config/config");
-const upload = require("./src/config/cloudinary.config");
+// const upload = require("./src/config/cloudinary.config");
 
 const userRoute = require("./src/routes/UserRoute");
 const drinkRoute = require("./src/routes/drink");
@@ -47,13 +47,17 @@ const categoryRoute = require("./src/routes/category");
 const roleRoute = require("./src/routes/RoleRoute");
 const areaRoute = require("./src/routes/area");
 const tableRoute = require("./src/routes/table");
+const drinkOrderRoute = require("./src/routes/drinkOrder");
+const orderRoute = require("./src/routes/order");
 
 app.use("/api/user", userRoute);
 app.use("/api/role", roleRoute);
-app.use("/api", upload.single("file"), drinkRoute);
+app.use("/api", drinkRoute);
 app.use("/api", categoryRoute);
 app.use("/api", areaRoute);
 app.use("/api", tableRoute);
+app.use("/api", drinkOrderRoute);
+app.use("/api", orderRoute);
 
 mongoose.connection.once("open", () => {
   console.log("Connect mongodb");

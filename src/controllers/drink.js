@@ -9,9 +9,10 @@ const drinkController = {
       const newDrink = new Drink({
         name: req.body.name,
         price: req.body.price,
-        image: req.file.path,
+        image: req.body.image,
         category: req.body.category,
       });
+      console.log(newDrink);
       const saveDrink = await newDrink.save();
       if (req.body.category) {
         const category = Category.findById(req.body.category);
@@ -27,7 +28,7 @@ const drinkController = {
         data: {
           name: req.body.name,
           price: req.body.price,
-          image: req.file.path,
+          image: req.body.image,
           category: req.body.category,
         },
       });
@@ -45,6 +46,38 @@ const drinkController = {
       res.status(200).json({
         success: true,
         message: "read successful drinks",
+        data: drinks,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        data: error,
+      });
+    }
+  },
+
+  getSortIncreaseOnPrice: async (req, res) => {
+    try {
+      const drinks = await Drink.find().sort({ price: 1 });
+      res.status(200).json({
+        success: true,
+        message: "read successful drinks sort increase on price",
+        data: drinks,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        data: error,
+      });
+    }
+  },
+
+  getSortDecreaseOnPrice: async (req, res) => {
+    try {
+      const drinks = await Drink.find().sort({ price: -1 });
+      res.status(200).json({
+        success: true,
+        message: "read successful drinks sort decrease on price",
         data: drinks,
       });
     } catch (error) {
@@ -98,26 +131,15 @@ const drinkController = {
   updateDrink: async (req, res) => {
     try {
       const drink = await Drink.findById(req.params.id);
-      const image = req.file;
 
-      if (!image) {
-        await drink.updateOne({
-          $set: {
-            name: req.body.name,
-            price: req.body.price,
-            category: req.body.category,
-          },
-        });
-      } else {
-        await drink.updateOne({
-          $set: {
-            name: req.body.name,
-            price: req.body.price,
-            image: req.file.path,
-            category: req.body.category,
-          },
-        });
-      }
+      await drink.updateOne({
+        $set: {
+          name: req.body.name,
+          price: req.body.price,
+          image: req.body.image,
+          category: req.body.category,
+        },
+      });
 
       res.status(200).json({
         success: true,
