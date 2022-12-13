@@ -7,6 +7,9 @@
     "start": "node index.js",
     "test": "nodemon index.js"
   },
+  "engines": {
+    "node": "19.x"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
