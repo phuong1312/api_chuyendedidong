@@ -65,7 +65,7 @@ const userController = {
             if (deleteUser) {
                 await Role.updateMany({ users: req.params.id }, { $pull: { users: req.params.id } });
             };
-            return res.status(200).send("Delete User is Success!");
+            return res.status(200).send({"messenger" : "Delete User is Success!"});
         } catch (err) {
             return  res.status(500).json(err);
         };
