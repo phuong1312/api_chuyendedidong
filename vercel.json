@@ -1,10 +1,15 @@
 {
-    "rewrites": [
-    { "source": "/(.*)", "destination": "/index.js" },
-    { "source": "/src/config/(.*)", "destination": "/" },
-    { "source": "/src/routes/(.*)", "destination": "/" },
-    { "source": "/src/controllers/(.*)", "destination": "/" },
-    { "source": "/src/models/(.*)", "destination": "/" }
-]
-}
-  
+    "version": 2,
+    "builds": [
+      {
+        "src": "./index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
+    ]
+  }
