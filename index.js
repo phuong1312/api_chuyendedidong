@@ -41,7 +41,7 @@ app.use(cors());
 var dbConn = require(path.join(__dirname, "./srcs/config/config"));
 // const upload = require("./src/config/cloudinary.config");
 
-const userRoute = require(path.join(__dirname, "./srcs/routes/user.js"));
+// const userRoute = require(path.join(__dirname, "./srcs/routes/user.js"));
 // console.log(path.join(__dirname, "./src/config/config"));
 // const drinkRoute = require("./src/routes/drink");
 // const categoryRoute = require("./src/routes/category");
@@ -50,9 +50,9 @@ const userRoute = require(path.join(__dirname, "./srcs/routes/user.js"));
 // const tableRoute = require("./src/routes/table");
 // const drinkOrderRoute = require("./src/routes/drinkOrder");
 // const orderRoute = require("./src/routes/order");
-const authorization = require('./srcs/config/authtokenrequired');
+// const authorization = require('./srcs/config/authtokenrequired');
 
-app.use("/api/user", userRoute);
+// app.use("/api/user", userRoute);
 // app.use("/api/role", roleRoute);
 // app.use("/api", drinkRoute);
 // app.use("/api", categoryRoute);
@@ -74,12 +74,12 @@ mongoose.connection.once("open", () => {
 
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(morgan('common'));
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).json("ok");
 });
-app.get('/', authorization, (req, res) => {
-    console.log(req.user);
-    return res.json(req.user);
-});
+// app.get('/', authorization, (req, res) => {
+//     console.log(req.user);
+//     return res.json(req.user);
+// });
 const home = require("./srcs/routes/home");
 app.use("/home",home);
