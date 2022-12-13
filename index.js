@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("common"));
 app.use(cors());
-app.use("./uploads", express.static(path.join(__dirname, "uploads")));
-app.set("view engine", "ejs");
+// app.use("./uploads", express.static(path.join(__dirname, "uploads")));
+// app.set("view engine", "ejs");
 
 // var storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -38,27 +38,28 @@ app.set("view engine", "ejs");
 
 // var upload = multer({ storage: storage });
 
-var dbConn = require("./src/config/config");
+var dbConn = require(path.join(__dirname, "./src/config/config"));
 // const upload = require("./src/config/cloudinary.config");
 
-const userRoute = require("./src/routes/user");
-const drinkRoute = require("./src/routes/drink");
-const categoryRoute = require("./src/routes/category");
-const roleRoute = require("./src/routes/role");
-const areaRoute = require("./src/routes/area");
-const tableRoute = require("./src/routes/table");
-const drinkOrderRoute = require("./src/routes/drinkOrder");
-const orderRoute = require("./src/routes/order");
+const userRoute = require(path.join(__dirname, "./src/routes/user.js"));
+// console.log(path.join(__dirname, "./src/config/config"));
+// const drinkRoute = require("./src/routes/drink");
+// const categoryRoute = require("./src/routes/category");
+// const roleRoute = require("./src/routes/role");
+// const areaRoute = require("./src/routes/area");
+// const tableRoute = require("./src/routes/table");
+// const drinkOrderRoute = require("./src/routes/drinkOrder");
+// const orderRoute = require("./src/routes/order");
 const authorization = require('./src/config/authtokenrequired');
 
 app.use("/api/user", userRoute);
-app.use("/api/role", roleRoute);
-app.use("/api", drinkRoute);
-app.use("/api", categoryRoute);
-app.use("/api", areaRoute);
-app.use("/api", tableRoute);
-app.use("/api", drinkOrderRoute);
-app.use("/api", orderRoute);
+// app.use("/api/role", roleRoute);
+// app.use("/api", drinkRoute);
+// app.use("/api", categoryRoute);
+// app.use("/api", areaRoute);
+// app.use("/api", tableRoute);
+// app.use("/api", drinkOrderRoute);
+// app.use("/api", orderRoute);
 
 mongoose.connection.once("open", () => {
   console.log("Connect mongodb");
@@ -69,9 +70,6 @@ mongoose.connection.once("open", () => {
     }, 300000);
   });
 });
-
-app.use('/api/user', userRoute);
-app.use('/api/role', roleRoute);
 
 
 app.use(bodyParser.json({limit: "50mb"}));

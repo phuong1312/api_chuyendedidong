@@ -1,5 +1,7 @@
-const User = require("../models/user");
-const Role = require("../models/role");
+const path = require("path");
+const User = require(path.join(__dirname, "../models/user.js"));
+// console.log(path.join(__dirname, "../models/user.js"));
+const Role = require(path.join(__dirname, "../models/role.js"));
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const internetAvailable = require("internet-available");
