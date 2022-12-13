@@ -39,7 +39,7 @@ app.use(cors());
 
 // const upload = require("./src/config/cloudinary.config");
 
-const userRoute = require(path.join(process.cwd(),'src','routes','user.js'));
+// const userRoute = require("./src/routes/user");
 // const drinkRoute = require("./src/routes/drink");
 // const categoryRoute = require("./src/routes/category");
 // const roleRoute = require("./src/routes/role");
@@ -49,7 +49,7 @@ const userRoute = require(path.join(process.cwd(),'src','routes','user.js'));
 // const orderRoute = require("./src/routes/order");
 // const authorization = require('./src/config/authtokenrequired');
 
-app.use("/api/user", userRoute);
+// app.use("/api/user", userRoute);
 // app.use("/api/role", roleRoute);
 // app.use("/api", drinkRoute);
 // app.use("/api", categoryRoute);
@@ -80,6 +80,7 @@ mongoose.connection.on("error", (err) => {
 //     return res.status(200).json(req.user);
 // });
 app.get('/',  (req, res) => {
+    console.log(path.join(__dirname,'src','routes','user.js'));
     return res.send({"message": "ok"});
 });
 // const home = require("./src/routes/home");
@@ -88,7 +89,6 @@ app.get('/',  (req, res) => {
 
 app.listen(port, () => {
   console.log("server api port " + port);
-  console.log("");
   setInterval(function () {
     console.log("server api port " + port);
   }, 300000);
