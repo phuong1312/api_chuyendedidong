@@ -49,7 +49,6 @@ const areaRoute = require("./src/routes/area");
 const tableRoute = require("./src/routes/table");
 const drinkOrderRoute = require("./src/routes/drinkOrder");
 const orderRoute = require("./src/routes/order");
-const roleRoute = require('./src/routes/RoleRoute');
 const authorization = require('./src/config/AuthTokenRequired');
 
 app.use("/api/user", userRoute);

@@ -8,18 +8,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
         trim: true,
-        // required: true,
+        required: true,
     },
     password: {
         type: String,
         trim: true,
-        // required: true,
+        required: true,
     },
     full_name: {
         type: String,
         unique: true,
         trim: true,
-        // required: true,
+        required: true,
     },
     phone: {
         type: String,
@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     role: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role",
-        // required: true,
+        required: true,
     },}, { timestamps: true });
 
 userSchema.pre('save', async function(next) {
