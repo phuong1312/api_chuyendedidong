@@ -41,15 +41,15 @@ app.set("view engine", "ejs");
 var dbConn = require("./src/config/config");
 // const upload = require("./src/config/cloudinary.config");
 
-const userRoute = require("./src/routes/UserRoute");
+const userRoute = require("./src/routes/user");
 const drinkRoute = require("./src/routes/drink");
 const categoryRoute = require("./src/routes/category");
-const roleRoute = require("./src/routes/RoleRoute");
+const roleRoute = require("./src/routes/role");
 const areaRoute = require("./src/routes/area");
 const tableRoute = require("./src/routes/table");
 const drinkOrderRoute = require("./src/routes/drinkOrder");
 const orderRoute = require("./src/routes/order");
-const authorization = require('./src/config/AuthTokenRequired');
+const authorization = require('./src/config/authtokenrequired');
 
 app.use("/api/user", userRoute);
 app.use("/api/role", roleRoute);
