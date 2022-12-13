@@ -1,4 +1,5 @@
-// const userController = require("../controllers/user");
+const path = require("path");
+const userController = require(path.join(__dirname,'../','controllers','user.js'));
 
 const router = require('express').Router();
 
