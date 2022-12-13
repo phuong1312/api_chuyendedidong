@@ -1,7 +1,7 @@
 const path = require("path");
-const User = require(path.join(process.cwd(),'src','models','user.js'));
-console.log(path.join(process.cwd(),'src','models','user.js'));
-const Role = require(path.join(process.cwd(),'src','models','role.js'));
+const User = require(path.join(__dirname,'../','models','user.js'));
+// console.log(path.join(process.cwd(),'src','models','user.js'));
+// const Role = require(path.join(process.cwd(),'src','models','role.js'));
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const internetAvailable = require("internet-available");
