@@ -81,5 +81,5 @@ app.get('/api', (req, res) => {
 });
 app.get('/home', authorization, (req, res) => {
     console.log(req.user);
-    res.send(req.user);
+    res.json(req.user);
 });
