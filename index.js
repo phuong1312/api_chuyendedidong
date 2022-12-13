@@ -49,7 +49,7 @@ const userRoute = require(path.join(__dirname,'src','routes','user.js'));
 // const orderRoute = require("./src/routes/order");
 // const authorization = require('./src/config/authtokenrequired');
 
-// app.use("/api/user", userRoute);
+app.use("/api/user", userRoute);
 // app.use("/api/role", roleRoute);
 // app.use("/api", drinkRoute);
 // app.use("/api", categoryRoute);
