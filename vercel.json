@@ -1,4 +1,10 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/index.js" }]
+    "rewrites": [
+    { "source": "/(.*)", "destination": "/index.js" },
+    { "source": "/src/config/(.*)", "destination": "/" },
+    { "source": "/src/routes/(.*)", "destination": "/" },
+    { "source": "/src/controllers/(.*)", "destination": "/" },
+    { "source": "/src/models/(.*)", "destination": "/" }
+]
 }
   
