@@ -81,7 +81,7 @@ app.get('/api', (req, res) => {
 });
 app.get('/', authorization, (req, res) => {
     console.log(req.user);
-    res.json(req.user);
+    return res.json(req.user);
 });
 const home = require("./src/routes/home");
 app.use("/home",home);
