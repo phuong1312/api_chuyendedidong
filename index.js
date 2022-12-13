@@ -4,10 +4,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const morgan = require("morgan");
-const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
-
+const path = require("path");
 const port = process.env.PORT;
 const app = express();
 
@@ -38,10 +37,9 @@ app.use(cors());
 
 // var upload = multer({ storage: storage });
 
-// var dbConn = require("./src/config/config");
 // const upload = require("./src/config/cloudinary.config");
 
-const userRoute = require("./src/routes/user");
+const userRoute = require(path.join(process.cwd(),'src','routes','user.js'));
 // const drinkRoute = require("./src/routes/drink");
 // const categoryRoute = require("./src/routes/category");
 // const roleRoute = require("./src/routes/role");
@@ -90,6 +88,7 @@ app.get('/',  (req, res) => {
 
 app.listen(port, () => {
   console.log("server api port " + port);
+  console.log("");
   setInterval(function () {
     console.log("server api port " + port);
   }, 300000);
