@@ -49,6 +49,8 @@ const areaRoute = require("./src/routes/area");
 const tableRoute = require("./src/routes/table");
 const drinkOrderRoute = require("./src/routes/drinkOrder");
 const orderRoute = require("./src/routes/order");
+const roleRoute = require('./src/routes/RoleRoute');
+const authorization = require('./src/config/AuthTokenRequired');
 
 app.use("/api/user", userRoute);
 app.use("/api/role", roleRoute);
@@ -69,4 +71,16 @@ mongoose.connection.once("open", () => {
   });
 });
 
-app.use(bodyParser.json({ limit: "50mb" }));
+app.use('/api/user', userRoute);
+app.use('/api/role', roleRoute);
+
+
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(morgan('common'));
+app.get('/api', (req, res) => {
+    res.status(200).json("ok");
+});
+app.get('/', authorization, (req, res) => {
+    console.log(req.user);
+    res.send(req.user);
+});
