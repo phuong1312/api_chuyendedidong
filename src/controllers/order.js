@@ -21,7 +21,7 @@ const orderController = {
   },
   getAllOrder: async (req, res) => {
     try {
-      const orders = await Order.find();
+      const orders = await Order.find().populate('drinks');
       res.status(200).json({
         success: true,
         message: "read successful order",
