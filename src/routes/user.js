@@ -1,6 +1,5 @@
 const path = require("path");
 const userController = require(path.join(process.cwd(),'src','controllers','user.js'));
-console.log(path.join(process.cwd(),'src','controllers','user.js'));
 const router = require('express').Router();
 
 // //login user
