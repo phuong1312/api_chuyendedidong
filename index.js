@@ -19,28 +19,18 @@ app.use(cors());
 app.use("./uploads", express.static(path.join(__dirname, "uploads")));
 app.set("view engine", "ejs");
 
-// var storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "./uploads");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.originalname);
-//   },
-// });
-
-// const fileFilter = (req, file, cb) => {
-//   if (file.mimetype === "image/jpg" || file.mimetype === "image/png") {
-//     cb(null, true);
-//   } else {
-//     cb(null, false);
-//   }
-// };
-
-// var upload = multer({ storage: storage });
-
-var dbConn = require("./src/config/config");
-// const upload = require("./src/config/cloudinary.config");
-
+// var dbConn = require("./src/config/config");
+const DBConnect = async () => {
+  try {
+      await mongoose.connect(process.env.DATABASE_URL, {
+          useUnifiedTopology: true,
+          useNewUrlParser: true
+      }, {server:{auto_reconnect:true}});
+  } catch (err) {
+      console.error(err);
+  }
+}; 
+DBConnect();
 const userRoute = require("./src/routes/user");
 const drinkRoute = require("./src/routes/drink");
 const categoryRoute = require("./src/routes/category");
