@@ -39,7 +39,7 @@ app.use(cors());
 
 // const upload = require("./src/config/cloudinary.config");
 
-// const userRoute = require("./src/routes/user");
+const userRoute = require(path.join(__dirname,'src','routes','user.js'));
 // const drinkRoute = require("./src/routes/drink");
 // const categoryRoute = require("./src/routes/category");
 // const roleRoute = require("./src/routes/role");
