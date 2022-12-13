@@ -85,3 +85,4 @@ app.get('/', authorization, (req, res) => {
 });
 const home = require("./src/routes/home");
 app.use("/home",home);
+module.exports = app;
