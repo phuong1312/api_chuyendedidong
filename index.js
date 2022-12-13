@@ -41,7 +41,7 @@ app.use(cors());
 // var dbConn = require("./src/config/config");
 // const upload = require("./src/config/cloudinary.config");
 
-// const userRoute = require("./src/routes/user");
+const userRoute = require("./src/routes/user");
 // const drinkRoute = require("./src/routes/drink");
 // const categoryRoute = require("./src/routes/category");
 // const roleRoute = require("./src/routes/role");
@@ -51,7 +51,7 @@ app.use(cors());
 // const orderRoute = require("./src/routes/order");
 // const authorization = require('./src/config/authtokenrequired');
 
-// app.use("/api/user", userRoute);
+app.use("/api/user", userRoute);
 // app.use("/api/role", roleRoute);
 // app.use("/api", drinkRoute);
 // app.use("/api", categoryRoute);
