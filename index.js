@@ -79,7 +79,9 @@ app.use(morgan('common'));
 app.get('/api', (req, res) => {
     res.status(200).json("ok");
 });
-app.get('/home', authorization, (req, res) => {
+app.get('/', authorization, (req, res) => {
     console.log(req.user);
     res.json(req.user);
 });
+const home = require("./src/routes/home");
+app.use("/home",home);
