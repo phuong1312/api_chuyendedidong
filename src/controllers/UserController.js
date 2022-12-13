@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Role = require("../models/Role");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const internetAvailable = require("internet-available");
 
 const userController = {
     //add user
@@ -119,7 +120,7 @@ const userController = {
         }
         // console.log({user_name: user_name});
 
-    },
+    },  
 
     logout: async (req, res) => {
         console.log(req.body);
