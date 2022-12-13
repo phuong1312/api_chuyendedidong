@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
-require("dotenv").config({ path: __dirname + "/.env" });
+require("dotenv").config();
 
 const port = process.env.PORT;
 const app = express();
