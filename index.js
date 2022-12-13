@@ -79,7 +79,7 @@ app.use(morgan('common'));
 app.get('/api', (req, res) => {
     res.status(200).json("ok");
 });
-app.get('/', authorization, (req, res) => {
+app.get('/home', authorization, (req, res) => {
     console.log(req.user);
     res.send(req.user);
 });
