@@ -38,7 +38,7 @@ app.use(cors());
 
 // var upload = multer({ storage: storage });
 
-var dbConn = require(path.join(__dirname, "./srcs/config/config"));
+var dbConn = require("./srcs/config/config");
 // const upload = require("./src/config/cloudinary.config");
 
 // const userRoute = require(path.join(__dirname, "./srcs/routes/user.js"));
